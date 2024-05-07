@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Data Dosen </h1>
+  <table id="data" class="table table-striped">
+    <thead>
+      <tr>
+        <th>NIM</th>
+        <th>Nama</th>
+        <th>Alamat</th>
+        <th>Program Studi</th>
+        <th>Jenis Kelamin</th>
+        <th>Aksi</th>
+      </tr>
+    </thead>
+    <tbody>
+        
+      {% for data in data_mahasiswa %}
+        <tr>
+          
+          <td>{{ data.nim }}</td>
+          <td>{{ data.nama }}</td>
+          <td>{{ data.alamat }}</td>
+          <td>{{ data.jurusan }}</td>
+          <td>{{ data.jenis_kelamin }}</td>
+
+          <td>
+            <a href="{{ url_for('edit_mahasiswa', id=data._id) }}">
+              <button class="button1" type="submit">EDIT1</button>
+          </a> 
+          <a href="#">
+            <button class="button3" type="submit">DELETE</button>
+        </a>
+        </td>
+        </tr>
+      {% endfor %}
+
+      
+    </tbody>
+  </table>
+{% endblock %}

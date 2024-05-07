@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 id="title">Form Input Data Mahasiswa</h1>
+<div id="form-outer">
+  <p id="description">
+    Silahkan Input Data Mahasiswa
+  </p>
+
+  <br>
+  <a href="/list_mahasiswa" class="nav-link">Lihat Data Mahasiswa</a>
+  <br>
+
+  <form id="survey-form" method="POST" action="/mahasiswa" onsubmit="return validateForm()">
+    <div class="rowTab">
+      <div class="labels">
+        <label id="name-label" for="name">NIM </label>
+      </div>
+      <div class="rightTab">
+        <input autofocus type="number" name="i_nim" id="nim" class="input-field" placeholder="Enter your NIM" required>
+      </div>
+    </div>
+
+    <div class="rowTab">
+      <div class="labels">
+        <label id="name-label" for="name">Nama </label>
+      </div>
+      <div class="rightTab">
+        <input autofocus type="text" name="i_nama" id="nama" class="input-field" placeholder="Enter your Name" required>
+      </div>
+    </div>
+
+    <div class="rowTab">
+      <div class="labels">
+        <label for="program_studi">Program Studi: </label>
+      </div>
+      <div class="rightTab">
+        <select id="dropdown" name="i_jurusan" 
+        class="dropdown" required>
+          <option disabled selected>Pilih Jurusan</option>
+          {% for jurusan in data_jurusan %}
+                <option value="{{ jurusan.nama_jurusan }}">
+                  {{ jurusan.nama_jurusan }}
+                </option>
+            {% endfor %}
+          </select>
+      </div>
+    </div>
+
+    <div class="rowTab">
+      <div class="labels">
+        <label for="address">Alamat: </label>
+      </div>
+      <div class="rightTab">
+        <textarea id="comments" class="input-field" style="height:50px;resize:vertical;" name="i_alamat" placeholder="Enter your address here..."></textarea>
+      </div>
+    </div>
+
+    
+
+
+    <div class="rowTab">
+      <div class="labels">
+        <label for="i_jns_kl">Jenis Kelamin: </label>
+      </div>
+      <div class="rightTab">
+        <ul style="list-style: none;">
+          <label class="radio-inline">
+            <input name="i_jns_kl" value="Laki-laki" type="radio">
+            Laki-laki</label>
+          <label class="radio-inline">
+            <input name="i_jns_kl" value="Perempuan" type="radio">
+            Perempuan</label>
+        </ul>
+      </div>
+    </div>
+
+   
+
+    <div class="rowTab">
+      <div class="labels">
+        <label for="language">Kompetensi </label>
+      </div>
+      <div class="rightTab">
+        
+        <ul id="language" style="list-style: none;">
+          {% for kompetensi in data_kompetensi %}
+          
+          <li class="checkbox">
+            <label>
+              <input name="kompetensi" type="checkbox" class="userRatings" value="{{ kompetensi.nama_kompetensi }}">
+              {{ kompetensi.nama_kompetensi }}
+            </label>
+            </li>
+          {% endfor %}
+          </ul>
+      </div>
+    </div>
+    
+    <button id="submit" type="submit">Submit</button>
+    <button id="reset" type="reset">Reset</button>
+  </form>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Data Mahasiswa</h1>
+
+<form action="{{ url_for('create_mahasiswa') }}" method="POST">
+    <label for="nim">NIM:</label>
+    <input type="text" id="nim" name="nim" required>
+    <label for="nama">Nama:</label>
+    <input type="text" id="nama" name="nama" required>
+    <label for="alamat">Alamat:</label>
+    <input type="text" id="alamat" name="alamat" required>
+    <button type="submit">Tambah</button>
+</form>
+
+<table>
+    <tr>
+        <th>NIM</th>
+        <th>Nama</th>
+        <th>Alamat</th>
+        <th>Aksi</th>
+    </tr>
+    {% for mhs in mahasiswa %}
+        <tr>
+            <td>{{ mhs.nim }}</td>
+            <td>{{ mhs.nama }}</td>
+            <td>{{ mhs.alamat }}</td>
+            <td>
+                <a href="{{ url_for('edit_mahasiswa', id=mhs._id) }}">Edit</a>
+                <a href="{{ url_for('delete_mahasiswa', id=mhs._id) }}">Hapus</a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
+{% endblock %}

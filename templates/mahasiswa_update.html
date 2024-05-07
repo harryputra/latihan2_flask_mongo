@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 id="title">Form Input Data Mahasiswa</h1>
+<div id="form-outer">
+  <p id="description">
+    Silahkan Input Data Mahasiswa
+  </p>
+
+<br>
+  <a href="/list_mahasiswa" class="nav-link">Lihat Data Mahasiswa</a>
+  <br>
+  
+  <form id="survey-form" method="POST" action="/mahasiswa" onsubmit="return validateForm()">
+    {% for mhs in mahasiswa %}  
+    <div class="rowTab">
+        <div class="labels">
+          <label id="name-label" for="name">NIM </label>
+        </div>
+        <div class="rightTab">
+          <input autofocus type="number" name="i_nim" id="nim" class="input-field" placeholder="Enter your NIM" required>
+        </div>
+      </div>
+
+      <div class="rowTab">
+        <div class="labels">
+          <label id="name-label" for="name">Nama </label>
+        </div>
+        <div class="rightTab">
+          <input autofocus type="text" name="i_nama" id="nama" class="input-field" placeholder="Enter your Name" required>
+        </div>
+      </div>
+
+    <div class="rowTab">
+      <div class="labels">
+        <label for="address">Alamat: </label>
+      </div>
+      <div class="rightTab">
+        <textarea id="comments" class="input-field" style="height:50px;resize:vertical;" name="i_alamat" placeholder="Enter your address here..."></textarea>
+      </div>
+    </div>
+    
+    
+    <a href="{{ url_for('edit_mahasiswa', id=mhs._id) }}"><button id="submit" type="submit">Submit</button></a>
+    <button id="reset" type="reset">Reset</button>
+    {% endfor %}
+  </form>
+</div>
+{% endblock %}

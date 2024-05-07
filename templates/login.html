@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 id="title">FORM LOGIN</h1>
+<div id="form-outer">
+  <p id="description">
+    Silahkan Login
+  </p>
+
+<br>
+  
+  <form id="survey-form" method="POST" action="/login" onsubmit="return validateForm()">
+      <div class="rowTab">
+        <div class="labels">
+          <label id="name-label" for="name">Username </label>
+        </div>
+        <div class="rightTab">
+          <input autofocus type="text" name="i_username" id="username" class="input-field" placeholder="Enter your Username" required>
+        </div>
+      </div>
+
+      <div class="rowTab">
+        <div class="labels">
+          <label id="name-label" for="name">Password </label>
+        </div>
+        <div class="rightTab">
+          <input autofocus type="password" name="i_password" id="password" class="input-field" placeholder="Enter your password" required>
+        </div>
+      </div>
+
+    
+    
+    
+    <button id="submit" type="submit">LOGIN</button></a>
+
+  </form>
+</div>
+{% endblock %}

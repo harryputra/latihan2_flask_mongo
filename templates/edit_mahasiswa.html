@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 id="title">Form Update Data Mahasiswa1</h1>
+<div id="form-outer">
+  <p id="description">
+    Silahkan Update Data Mahasiswa
+  </p>
+
+<br>
+  <a href="/list_mahasiswa" class="nav-link">Lihat Data Mahasiswa</a>
+  <br>
+  
+  <form id="survey-form" method="POST" action="{{ url_for('update_mahasiswa', id=mahasiswa._id) }}" onsubmit="return validateForm()">
+      <div class="rowTab">
+        <div class="labels">
+          <label id="name-label" for="name">NIM </label>
+        </div>
+        <div class="rightTab">
+          <input autofocus type="number" name="i_nim" id="nim" value="{{ mahasiswa.nim }}" class="input-field" placeholder="Enter your NIM" required>
+        </div>
+      </div>
+
+      <div class="rowTab">
+        <div class="labels">
+          <label id="name-label" for="name">Nama1 </label>
+        </div>
+        <div class="rightTab">
+          <input autofocus type="text" name="i_nama" id="nama" value="{{mahasiswa.nama}}" class="input-field" placeholder="Enter your Name" required>
+        </div>
+      </div>
+
+      <div class="rowTab">
+        <div class="labels">
+          <label for="program_studi">Program Studi: </label>
+        </div>
+        <div class="rightTab">
+          <select id="dropdown" name="i_jurusan" 
+          class="dropdown" required>
+            <option disabled selected>Pilih Jurusan</option>
+            {% for jurusan in list_jurusan %}
+            <option value="{{jurusan.nama_jurusan}}"
+            {% if mahasiswa.jurusan==jurusan.nama_jurusan %} 
+            selected="selected"
+            {% endif %}>
+              {{jurusan.nama_jurusan}}
+            </option>
+              {% endfor %}
+            </select>
+        </div>
+      </div>
+
+    <div class="rowTab">
+      <div class="labels">
+        <label for="address">Alamat: </label>
+      </div>
+      <div class="rightTab">
+        <textarea id="comments" class="input-field" style="height:50px;resize:vertical;" name="i_alamat" placeholder="Enter your address here...">{{mahasiswa.alamat}}</textarea>
+      </div>
+    </div>
+    
+    
+    <div class="rowTab">
+      <div class="labels">
+        <label for="i_jns_kl">Jenis Kelamin: </label>
+      </div>
+      <div class="rightTab">
+        <ul style="list-style: none;">
+          
+          <label class="radio-inline">
+            <input name="i_jns_kl" value="Laki-laki" type="radio" 
+            {% if mahasiswa.jenis_kelamin=="Laki-laki" %} 
+            checked="checked"
+            {% endif %}>
+            Laki-laki
+          </label>
+          
+          <label class="radio-inline">
+            <input name="i_jns_kl" value="Perempuan" type="radio" 
+            {% if mahasiswa.jenis_kelamin=="Perempuan" %} 
+            checked="checked"
+            {% endif %}>
+            Perempuan
+          </label>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rowTab">
+      <div class="labels">
+        <label for="language">Kompetensi </label>
+      </div>
+      <div class="rightTab">
+        <ul id="language" style="list-style: none;">
+          {% for item_kompetensi in list_kompetensi %}
+          <li class="checkbox"><label>
+            <input name="kompetensi" type="checkbox" 
+            value="{{ item_kompetensi.nama_kompetensi }}" 
+            {% if item_kompetensi.nama_kompetensi in mahasiswa.kompetensi %}
+            checked{% endif %} class="userRatings">
+            {{ item_kompetensi.nama_kompetensi }}
+            </li>
+          {% endfor %}
+         </ul>
+      </div>
+    </div>
+    
+    
+    <button id="submit" type="submit">Update</button></a>
+    <button id="reset" type="reset">Reset</button>
+  </form>
+</div>
+{% endblock %}
